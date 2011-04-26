@@ -28,6 +28,7 @@ Note that this JSON object describes what to do on an "up" call, and it's exact 
 Each of the JSON examples below is part of a single file. Ideally you will do a single operation per file (it's what the Rails guys do and it's made sense to me over time). The files are sorted in a SortedDictionary by key - and that key is a file name so it has to be something sortable. One thing you can do is a format like "YEAR_MONTH_DAY_TIME_description.js". So this might, in reality, look like "2011_04_21_1352_create_products.js". It's wordy, but it provides some nice meta data.
 
 The next simplest thing to do is to specify a few things with some more structure:
+```javascript
 	{
 		up:{
 			create_table:{
@@ -40,6 +41,7 @@ The next simplest thing to do is to specify a few things with some more structur
 			 }
 		}
 	}
+```
 In this example I'm using structured JSON - setting the table name and the columns (which need to be an array). JSON can be tricky for some people - but it's just the same as C# anonymous object declaration and after you do it once or twice you'll dig it.
 
 The datatypes used here are the same shorthand as the SQL call above - string will be converted the same way (as will money, text, boolean, and so on). Also - a bit of sweetness thrown in - if you want to have "audit" columns you can by setting "timestamps" to true. This will drop in two columns: "CreatedOn" and "UpdatedOn" that you should update when saving your data.
