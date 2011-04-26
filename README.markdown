@@ -28,7 +28,7 @@ Note that this JSON object describes what to do on an "up" call, and it's exact 
 Each of the JSON examples below is part of a single file. Ideally you will do a single operation per file (it's what the Rails guys do and it's made sense to me over time). The files are sorted in a SortedDictionary by key - and that key is a file name so it has to be something sortable. One thing you can do is a format like "YEAR_MONTH_DAY_TIME_description.js". So this might, in reality, look like "2011_04_21_1352_create_products.js". It's wordy, but it provides some nice meta data.
 
 The next simplest thing to do is to specify a few things with some more structure:
-```javascript
+
 	{
 		up:{
 			create_table:{
@@ -41,7 +41,7 @@ The next simplest thing to do is to specify a few things with some more structur
 			 }
 		}
 	}
-```
+
 In this example I'm using structured JSON - setting the table name and the columns (which need to be an array). JSON can be tricky for some people - but it's just the same as C# anonymous object declaration and after you do it once or twice you'll dig it.
 
 The datatypes used here are the same shorthand as the SQL call above - string will be converted the same way (as will money, text, boolean, and so on). Also - a bit of sweetness thrown in - if you want to have "audit" columns you can by setting "timestamps" to true. This will drop in two columns: "CreatedOn" and "UpdatedOn" that you should update when saving your data.
@@ -49,6 +49,7 @@ The datatypes used here are the same shorthand as the SQL call above - string wi
 Finally - notice that there's no primary key defined? I meant to  - and sometimes we forget these things. I won't let you  - if you forget a PK it will automatically added for you (and called "Id").
 	
 Note that there is no "down" declared here. Create table has a pretty understandable reverse - "DROP TABLE" and we can infer that from this code. If you want to specify a "down" - go for it - that would look like this:
+
 	{
 		up:{
 			create_table:{
@@ -71,6 +72,7 @@ It helps to be explicit - less magic and all. If you're using this on a team you
 Also - sometimes it's helpful to add some data or run some clean up stuff. Maybe add a foreign key or an index - that's what "execute" does. It will run after everything else is finished and you can drop that in up or down.
 
 Once you're up and running with your new tables, you'll likely want to change them. You can do that by adding a column:
+
 	{
 		up:{
 			add_column:{
@@ -87,7 +89,9 @@ Once you're up and running with your new tables, you'll likely want to change th
 			}
 		}
 	}
+	
 Note the reverse here uses "remove_column". If you use Rails you might recognize these names :). You can also modify an existing column if you like:
+
 	{
 		up:{
 			change_column:{
@@ -106,6 +110,7 @@ Note the reverse here uses "remove_column". If you use Rails you might recognize
 			}
 		}
 	}
+	
 And that's just about it. To run this thing - just run the code (migrate.cshtml) and up will pop your page. It will try and read the files in your DB/Migrations directory and it will tell you what to do next.
 
 If you see any weirdness - lemme know!
