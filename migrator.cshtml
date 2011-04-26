@@ -220,12 +220,11 @@
                     }
                 }else{
                     db.Execute(GetCommand(migration.down));
+                    //run any execution calls that are part of "up"
                     CheckForExecute(db, migration.down);
                 }   
                 //decrement the version
                 db.Execute("UPDATE SchemaInfo SET Version = Version - 1");
-                
-                //run any execution calls that are part of "up"
 
             }
         }
