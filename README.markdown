@@ -17,10 +17,12 @@ How Do You Use It?
 It works with JSON and before you think "puke" - JSON can be used as a bit of a DSL/script that reads rather nicely. If you can write an anonymous object in C#, you can write JSON. Get over it.
 
 The simplest thing to do is call your DDL directly:
+
 	{
     		up:"CREATE TABLE Orders (ID {pk}, OrderNumber {string} NOT NULL, SubTotal {money})",
     		down:"DROP TABLE Orders"
 	}
+	
 Some people like SQL. I like SQL. And then some don't. That's OK - if you're in the latter camp I'll help you in a second. In this example I've just told SQL to create a table for an "up" operation - a "version up" if you will. In there I have some replacement strings that will get replaced with the default values I like. "string" is "varchar(255)", "money" is decimal(8,2), "pk" is "int NOT NULL IDENTITY(1,1) PRIMARY KEY". You get the idea.
 
 Note that this JSON object describes what to do on an "up" call, and it's exact opposite is run on the "down" call. You don't have to do this if you use the JSON bits below. If you go straight SQL, you do.
