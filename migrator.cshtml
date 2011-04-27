@@ -23,7 +23,7 @@
         var counter = 0;
         foreach (dynamic col in columns) {
             //name
-            sb.AppendFormat(", {0} ", col.name);
+            sb.AppendFormat(", [{0}] ", col.name);
 
             //append on the type. Don't do this in the formatter since the replacer might return no change at all
             sb.Append(SetColumnType(col.type));
