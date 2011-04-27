@@ -27,7 +27,7 @@ Some people like SQL. I like SQL. And then some don't. That's OK - if you're in 
 
 Note that this JSON object describes what to do on an "up" call, and it's exact opposite is run on the "down" call. You don't have to do this if you use the JSON bits below. If you go straight SQL, you do.
 
-Each of the JSON examples below is part of a single file. Ideally you will do a single operation per file (it's what the Rails guys do and it's made sense to me over time). The files are sorted in a SortedDictionary by key - and that key is a file name so it has to be something sortable. One thing you can do is a format like "YEAR_MONTH_DAY_TIME_description.js". So this might, in reality, look like "2011_04_21_1352_create_products.js". It's wordy, but it provides some nice meta data.
+Each of the JSON examples below is part of a single file. Ideally you will do a single operation per file (it's what the Rails guys do and it's made sense to me over time). The files are sorted in a SortedDictionary by key - and that key is a file name so it has to be something sortable. One thing you can do is a format like `YEAR_MONTH_DAY_TIME_description.js`. So this might, in reality, look like `2011_04_21_1352_create_products.js`. It's wordy, but it provides some nice meta data.
 
 The next simplest thing to do is to specify a few things with some more structure:
 
