@@ -138,7 +138,7 @@
             result = string.Format("ALTER TABLE [{0}] ADD {1} ", op.add_column.table, StripLeadingComma(BuildColumnList(op.add_column.columns)));
             //DROP COLUMN
         } else if (op.remove_column != null) {
-            result = string.Format("ALTER TABLE [{0}] DROP COLUMN {1}", op.remove_column.table, op.remove_column.name);
+            result = string.Format("ALTER TABLE [{0}] DROP COLUMN [{1}]", op.remove_column.table, op.remove_column.name);
             //CHANGE
         } else if (op.change_column != null) {
             result = string.Format("ALTER TABLE [{0}] ALTER COLUMN {1}", op.change_column.table, StripLeadingComma(BuildColumnList(op.change_column.columns)));
