@@ -102,20 +102,20 @@
                 }
             }
             columns = StripLeadingComma(columns);
-            result = string.Format("CREATE TABLE {0}\r\n\t ({1}) ", op.create_table.name, columns);
+            result = string.Format("CREATE TABLE [{0}]\r\n\t ({1}) ", op.create_table.name, columns);
 
             //DROP 
         } else if (op.drop_table != null) {
             return "DROP TABLE " + op.drop_table;
             //ADD COLUMN
         } else if (op.add_column != null) {
-            result = string.Format("ALTER TABLE {0} ADD {1} ", op.add_column.table, StripLeadingComma(BuildColumnList(op.add_column.columns)));
+            result = string.Format("ALTER TABLE [{0}] ADD {1} ", op.add_column.table, StripLeadingComma(BuildColumnList(op.add_column.columns)));
             //DROP COLUMN
         } else if (op.remove_column != null) {
-            result = string.Format("ALTER TABLE {0} DROP COLUMN {1}", op.remove_column.table, op.remove_column.name);
+            result = string.Format("ALTER TABLE [{0}] DROP COLUMN {1}", op.remove_column.table, op.remove_column.name);
             //CHANGE
         } else if (op.change_column != null) {
-            result = string.Format("ALTER TABLE {0} ALTER COLUMN {1}", op.change_column.table, StripLeadingComma(BuildColumnList(op.change_column.columns)));
+            result = string.Format("ALTER TABLE [{0}] ALTER COLUMN {1}", op.change_column.table, StripLeadingComma(BuildColumnList(op.change_column.columns)));
         }
 
         return result;
@@ -172,11 +172,11 @@
     static string ReadMinds(dynamic migration) {
         //CREATE
         if (migration.up.create_table != null) {
-            return string.Format("DROP TABLE {0}", migration.up.create_table.name);
+            return string.Format("DROP TABLE [{0}]", migration.up.create_table.name);
 
             //DROP COLUMN
         } else if (migration.up.add_column != null) {
-            return string.Format("ALTER TABLE {0} DROP COLUMN {1}", migration.up.add_column, migration.up.add_column.columns[0].name);
+            return string.Format("ALTER TABLE [{0}] DROP COLUMN {1}", migration.up.add_column, migration.up.add_column.columns[0].name);
         }
         return "";
 
