@@ -60,6 +60,31 @@
             return columns.Substring(2, columns.Length - 2);
         return columns;
     }
+	
+	/// <summary>
+	/// create unique name for index based on table and columns specified
+	/// </summary>
+	static string CreateIndexName(dynamic ix){
+		var sb = new System.Text.StringBuilder();
+		foreach(dynamic c in ix.columns){
+			sb.AppendFormat("{1}{0}", c.Replace(" ","_"), (sb.Length == 0 ? "" : "_")); // ternary to only add underscore if not first iteration
+		}
+		return string.Format("IX_{0}_{1}",ix.table_name,sb.ToString());	
+	}
+	
+	/// <summary>
+	/// create string for columns
+	/// </summary>
+	static string CreateIndexColumnString(dynamic columns){
+		var sb = new System.Text.StringBuilder();
+		foreach(dynamic c in columns){
+			sb.AppendFormat("{1} [{0}] ASC", c, (sb.Length == 0 ? "" : ",")); // ternary to only add comma if not first iteration
+		}
+		return sb.ToString();
+	}
+
+	
+	
 
     /// <summary>
     /// This is the main "builder" of the DDL SQL and it's tuned for SQL CE. 
@@ -117,7 +142,13 @@
             //CHANGE
         } else if (op.change_column != null) {
             result = string.Format("ALTER TABLE [{0}] ALTER COLUMN {1}", op.change_column.table, StripLeadingComma(BuildColumnList(op.change_column.columns)));
-        }
+			//ADD INDEX
+        } else if(op.add_index != null){
+            result = string.Format("CREATE NONCLUSTERED INDEX [{0}] ON [{1}] ({2} )", CreateIndexName(op.add_index), op.add_index.table_name, CreateIndexColumnString(op.add_index.columns));
+			//REMOVE INDEX
+		} else if(op.remove_index != null){
+            result = string.Format("DROP INDEX {0}.{1}", op.remove_index.table_name, CreateIndexName(op.remove_index));
+		}
 
         return result;
     }
@@ -174,11 +205,13 @@
         //CREATE
         if (migration.up.create_table != null) {
             return string.Format("DROP TABLE [{0}]", migration.up.create_table.name);
-
             //DROP COLUMN
         } else if (migration.up.add_column != null) {
             return string.Format("ALTER TABLE [{0}] DROP COLUMN {1}", migration.up.add_column, migration.up.add_column.columns[0].name);
-        }
+        } else if(migration.up.add_index != null){
+			// DROP INDEX
+            return string.Format("DROP INDEX {0}.{1}", migration.up.add_index.table_name, CreateIndexName(migration.up.add_index));
+		}
         return "";
 
     }

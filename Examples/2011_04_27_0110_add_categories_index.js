@@ -1,0 +1,20 @@
+﻿{
+	'up':{
+		add_index:{
+			table_name:"categories",
+            columns:[
+                "title",
+                "slug"
+             ]
+		}
+	},
+	'down':{
+		remove_index:{
+			table_name:"categories",
+            columns:[
+                "title",
+                "slug"
+             ]
+		}
+	}
+}
