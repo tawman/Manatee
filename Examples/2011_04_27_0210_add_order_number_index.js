@@ -1,0 +1,10 @@
+﻿{
+	'up':{
+		add_index:{
+			table_name:"Orders",
+            columns:[
+                "OrderNumber"
+             ]
+		}
+	}
+}

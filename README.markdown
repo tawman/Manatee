@@ -112,6 +112,30 @@ Note the reverse here uses "remove_column". If you use Rails you might recognize
         }
     }
 	
+
+To add indexes to your tables just specify the tables and the columns you want included in the index. The name will be generated for you by convention.
+The down definition is optional as well.  It will be handled if you don't include it.
+
+    {
+        'up':{
+            add_index:{
+                table_name:"categories",
+                columns:[
+                    "title",
+                    "slug"
+                 ]
+            }
+        },
+        'down':{
+            remove_index:{
+                table_name:"categories",
+                columns:[
+                    "title",
+                    "slug"
+                 ]
+            }
+        }
+    }
 And that's just about it. To run this thing - just run the code (migrate.cshtml) and up will pop your page. It will try and read the files in your `~/DB/Migrations` directory and it will tell you what to do next.
 
 If you see any weirdness - lemme know!
