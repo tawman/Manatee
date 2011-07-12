@@ -7,6 +7,9 @@ It's true that you can just use the designer - and if that works for you then ro
 
 Migrations help with this. It's conceivable that you might want to use SQL CE to develop with - but at some point push to SQL Server. You can do that with this little migrator quite easily - and you can also push incremental changes to your production box when you make them (just be sure to lock down this page so people can't mess with it.)
 
+A Little Video To Watch
+-----------------------
+http://www.youtube.com/watch?v=BX_O-HUc-_M
 
 How To Install It?
 ------------------
