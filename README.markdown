@@ -10,7 +10,7 @@ Migrations help with this. It's conceivable that you might want to use SQL CE to
 
 How To Install It?
 ------------------
-Drop the code file into your app and change it as you wish. By default the file wants to sit in the `~/DB` directory with your migration files sitting in `~/DB/Migrations`. But you can change all of this if you like.
+Manatee is an Executable Command-line tool that is meant to be dedicated to a project. Probably the simplest thing to do is copy the entire structure into your project - using it as a utility. Obviously you don't want to deploy it. It's supposed to help you along, it's just a standalone app.
 
 How Do You Use It?
 ------------------
@@ -136,6 +136,45 @@ The down definition is optional as well.  It will be handled if you don't includ
             }
         }
     }
-And that's just about it. To run this thing - just run the code (migrate.cshtml) and up will pop your page. It will try and read the files in your `~/DB/Migrations` directory and it will tell you what to do next.
+And that's just about it.
 
-If you see any weirdness - lemme know!
+Writing JSON is Boring
+----------------------
+I agree with you! So you can use Manatee to help you along. It will generate a stub for you - all you have to do is issue the command:
+
+	g create_MyTable
+	
+This command will create a file for you in your /Migrations directory with a numbering system applied. You can open it up and you should see this:
+    
+	{
+        'up':{
+            create_table:{
+				name:'MyTable',
+				columns:[
+					{name:'name', type:'string'},
+					{name:'description', type:'text'}
+				 ],
+				timestamps:true
+            }
+        }
+    }
+
+By default you're given a template which includes audits (CreatedOn, UpdatedOn) as well as a name and description field. If you don't like this - you can edit your own templates in the Templates.cs file.
+
+The type of template is dictated by the command entered. In this case the name "create_" tells Manatee that you want a new table. If you type in something else, like "index" or "fk" - a different file will be generated.
+
+I've tried to make the tool explain itself - there's a helper there (just type "help") that should explain what it does. I'll update this README as time goes on.
+
+Environments
+------------
+I like the Rails way of handling Environments. I hate the way you have to explicitly clone your structure to your test DB. So Manatee will do this for you, automatically - it's right at the top of Program.cs. Manatee expects up to 3 connections: "development", "test", and "production". If you choose to, you can keep development and test in sync by setting a little flag right in Program.cs.
+
+When you're ready to push your changeset live - enter the command "push". It will send the changeset off to your Production box.
+
+Testing Your SQL
+----------------
+You'll probably want to see what's going on before you commit it to your DB. For that, just enter the "/p" switch - which means "print". It will puke all the SQL to the screen.
+
+Thanks
+------
+Many thanks to Github user vegar (https://github.com/vegar) for helping with the core JSON serialization efforts. He pushed me to do this!
