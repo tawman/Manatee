@@ -1,4 +1,4 @@
-Manatee is a single-file, drop-in database migrator for ASP.NET/WebMatrix using .NET 4.0
+Manatee is a single-project, drop-in database migrator tool for .NET 4.0 projects of any flavors
 =================================================================================================
 
 If you know Rails, you know about Migrations. If you don't know Rails you'll be wondering why you would want to use this thing. The short answer is that it allows you to change your database over time - adding tables, changing columns, etc.
