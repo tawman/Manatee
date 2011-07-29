@@ -163,7 +163,7 @@ namespace VidPub.Tasks {
             Console.WriteLine(" ...  - create_ will do a create table, add_ will add a column, index_ will create an index template, fk_ will create an FK template");
             Console.WriteLine(" ...  - finally - if you name it with _'s, I'll do my best to figure out a table, column, or index name");
             Console.WriteLine("----------------------------------------------------------------------------------");
-            Console.WriteLine("So whaddya think?");
+            Console.WriteLine("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
             var command = Console.ReadLine();
             DecideWhatToDo(command);
        }
@@ -171,7 +171,7 @@ namespace VidPub.Tasks {
             Console.WriteLine("Manatee - Migrations for .NET");
             Console.WriteLine("Current DB Version: {0}",_development.CurrentVersion);
             Console.WriteLine("You have {0} migrations with {1} un-run. Type 'list' to see more details", _development.LastVersion, _development.LastVersion - _development.CurrentVersion);
-            Console.WriteLine("What is thy bidding? Type 'help' if you need... well help");
+            Console.WriteLine(">> (type 'h' or 'help' for assistance)");
             var command = Console.ReadLine();
             DecideWhatToDo(command);
         }
