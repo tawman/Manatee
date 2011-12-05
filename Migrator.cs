@@ -119,7 +119,7 @@ namespace Manatee {
                     Log(sql);
                     if (execute) {
                         _db.Execute(sql);
-						CheckForExecute(_db, migration);
+                        CheckForExecute(_db, migration);
                         //increment the version
                         _db.Execute("UPDATE SchemaInfo SET Version = Version +1");
                         _currentVersion++;
