@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using Manatee;
@@ -13,7 +14,7 @@ namespace VidPub.Tasks {
         static Migrator _production;
         //this will allow you to sync a test DB with your dev DB by running the same migrations
         //there
-        static bool _syncTestDB = false;
+        static bool _syncTestDB = Convert.ToBoolean(ConfigurationManager.AppSettings["SyncTestDatabase"]);
 
         static string[] _args;
         static void Main(string[] args) {
